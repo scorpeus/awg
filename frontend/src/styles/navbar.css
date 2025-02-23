@@ -1,0 +1,63 @@
+.navbar {
+  width: 100%;
+  border-radius: 20px;
+  background: rgba(242, 247, 249, 1);
+  /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); */
+  padding: 14px 8px;
+}
+
+.navbar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background: none;
+}
+
+.navbar li {
+  display: block;
+  margin-bottom: 5px;
+  background: none;
+}
+
+/* Убираем фон у ссылки */
+.nav-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  padding: 10px;
+  border-radius: 8px;
+  transition: background 0.2s ease-in-out;
+  width: 100%;
+  color: #696c73;
+  background: none;
+}
+
+.nav-link:hover {
+  /* background-color: #bbdce8; */
+  background: rgba(0, 0, 0, 0.05);
+  font-weight: 700;
+  /* color: #000000 !important; */
+}
+
+.nav-link.active {
+  background-color: #007bff;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+}
+
+.nav-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  background: none;
+  fill: currentColor; /* Наследует цвет от родителя */
+}
+
+.nav-link.active .nav-icon {
+  filter: brightness(0) invert(1);
+}
+
+.nav-link span {
+  background: none;
+  color: inherit;
+}

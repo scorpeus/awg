@@ -1,0 +1,30 @@
+.body-container {
+  display: flex;
+  flex-grow: 1;
+  height: 100vh;
+  gap: 16px;
+}
+
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  align-items: center;
+  /* background: #929292; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh;
+  letter-spacing: 0.5px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.mainbar {
+  width: 800px;
+}
+
+.infobar {
+  display: flex;
+  width: 220px; /* Фиксированная ширина */
+  overflow-y: auto;
+}

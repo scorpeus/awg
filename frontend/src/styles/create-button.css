@@ -1,0 +1,29 @@
+.create-button {
+  display: inline-block;
+  border-radius: 15px;
+  background: #007bff;
+  color: white;
+  padding: 8px 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.plus-button {
+  background-color: rgba(242, 247, 249, 1);
+  color: rgb(139, 139, 139);
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  font-weight: bold;
+  display: flex; /* Центрируем */
+  align-items: center;
+  justify-content: center;
+  line-height: 1; /* Исправляет смещение */
+  padding: 0; /* Убираем возможные отступы */
+  border: none; /* Убираем границу, если есть */
+}
+
+.plus-button:hover {
+  background-color: rgb(222, 228, 230);
+}

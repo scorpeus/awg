@@ -1,0 +1,71 @@
+.configuration-container {
+  right: 20px;
+  top: 20px;
+  bottom: 0;
+  min-width: max-content;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: rgba(231, 239, 242, 1);
+  border-radius: 10px;
+  transition: max-height 0.3s ease, opacity 0.3s ease;
+}
+
+.configuration-container.closed {
+  max-height: 30px; /* Только заголовок */
+}
+
+.config-header {
+  padding: 0px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 30px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.config-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  border-radius: 10px;
+}
+
+.config-content {
+  height: 100%;
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  color: rgba(105, 108, 115, 1);
+}
+.config-content::-webkit-scrollbar {
+  display: none;
+}
+
+.edit-button {
+  padding: 6px 16px;
+  margin: 10px;
+  align-self: flex-start;
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.config-toggle {
+  font-size: 12px;
+  line-height: 1;
+  padding: 2px; /* Уменьшает область вокруг */
+  width: 20px; /* Ограничивает ширину кнопки */
+  height: 20px; /* Ограничивает высоту кнопки */
+  letter-spacing: normal;
+  background: 0.5em;
+  transition: transform 0.3s ease;
+  align-items: center;
+  color: #808080;
+}
+
+.configuration-container.open .config-toggle {
+  transform: rotate(180deg);
+}

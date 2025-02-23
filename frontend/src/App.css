@@ -1,0 +1,126 @@
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFProDisplay_Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display Medium";
+  src: url("/fonts/SFProDisplay_Medium.otf") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display Light Italic";
+  src: url("/fonts/SFProDisplay_Light-Italic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SF Pro Display Semibold Italic";
+  src: url("/fonts/SFProDisplay_Semibold-Italic.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SF Pro Display Heavy Italic";
+  src: url("/fonts/SFProDisplay_Heavy-Italic.otf") format("opentype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SF Pro Display Thin Italic";
+  src: url("/fonts/SFProDisplay_Thin-Italic.otf") format("opentype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SF Pro Display Ultra-Light Italic";
+  src: url("/fonts/SFProDisplay_Ultra-light-Italic.otf") format("opentype");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "SF Pro Display Bold";
+  src: url("/fonts/SFProDisplay_Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display Black Italic";
+  src: url("/fonts/SFProDisplay_Black-Italic.otf") format("opentype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+* {
+  font-family: "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, sans-serif;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+/* 🔹 Общие стили для всех скроллбаров */
+* {
+  scrollbar-width: thin; /* Для Firefox */
+  scrollbar-color: rgba(189, 189, 189, 0.187) transparent; /* Цвет полосы и фона */
+}
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+/* 🔹 Минималистичный стиль скролла для Chrome, Edge, Safari */
+::-webkit-scrollbar {
+  width: 6px; /* Узкий вертикальный скролл */
+  height: 6px; /* Узкий горизонтальный скролл */
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.5); /* Полупрозрачный серый */
+  border-radius: 4px; /* Закруглённые края */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(120, 120, 120, 0.7); /* Затемняется при наведении */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent; /* Прозрачный фон */
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0056b3;
+}
+
+button {
+  font-family: inherit; /* Наследует SF Pro */
+  font-size: 16px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.app-container {
+  margin: 0 auto;
+  max-width: 1270px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}

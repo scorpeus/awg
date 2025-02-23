@@ -1,0 +1,78 @@
+/* Основной контейнер */
+.theme-switcher {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 180px;
+  height: 40px;
+  background-color: rgba(242, 247, 249, 1);
+  border-radius: 20px;
+  padding: 10px 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  position: sticky;
+  bottom: 30px;
+}
+.label {
+  background: none;
+}
+
+.theme-icon-dark {
+  background: none;
+  margin-right: 10px;
+}
+.theme-icon-light {
+  background: none;
+  margin-right: 10px;
+}
+
+/* Затемнение фона при темной теме */
+.theme-switcher.dark {
+  background-color: rgba(179, 179, 179, 1);
+}
+
+/* Ползунок */
+.slider {
+  position: absolute;
+  align-items: center;
+  width: 50%;
+  height: 30px;
+  background-color: white;
+  border-radius: 20px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+/* Ползунок при тёмной теме */
+.theme-switcher.dark .slider {
+  transform: translateX(80px);
+  background-color: black;
+}
+
+/* Опции (Light и Dark) */
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  color: #666;
+  font-size: 14px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+  background: none;
+  margin-right: 10px;
+}
+
+/* Цвета для активного состояния */
+.theme-switcher.dark .option.dark {
+  color: white;
+}
+
+.theme-switcher.light .option.light {
+  color: black;
+}
+/* Делаем иконку белой в тёмной теме */
+.theme-switcher.dark .theme-icon-dark {
+  filter: brightness(1000%);
+}
