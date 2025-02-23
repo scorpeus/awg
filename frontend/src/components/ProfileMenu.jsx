@@ -12,7 +12,7 @@ const ProfileMenu = () => {
 
   return (
     <div className="profile-menu">
-      {/* Иконка уведомлений */}
+      {/* Иконка уведомлени */}
       <div className="notification-icon">
         <img src={bellIcon} alt="Notifications" />
         {hasNotifications && <span className="notification-dot"></span>}

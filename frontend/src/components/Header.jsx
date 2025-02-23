@@ -15,7 +15,6 @@ function Header({ title }) {
         <h1 className="page-title">{title}</h1>
         <SearchBar />
       </div>
-
       <ProfileMenu />
     </header>
   );

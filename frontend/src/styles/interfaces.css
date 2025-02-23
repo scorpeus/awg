@@ -13,7 +13,6 @@
   /* height: 100%; */
 }
 
-/* Контейнер вкладок и кнопки "+" */
 .tabs-container {
   display: flex;
   align-items: center;

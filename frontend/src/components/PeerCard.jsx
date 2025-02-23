@@ -16,7 +16,6 @@ const PeerCard = ({ peer, onDelete, onEdit }) => {
   const textRef = useRef(null);
   const [isScrolling, setIsScrolling] = useState(false);
 
-  // Проверка, длиннее ли текст, чем контейнер
   useEffect(() => {
     const checkOverflow = () => {
       if (nameRef.current && textRef.current) {

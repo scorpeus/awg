@@ -26,7 +26,6 @@
   margin-right: 10px;
 }
 
-/* Затемнение фона при темной теме */
 .theme-switcher.dark {
   background-color: rgba(179, 179, 179, 1);
 }

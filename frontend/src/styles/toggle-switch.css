@@ -21,7 +21,6 @@
   transition: 0.3s;
 }
 
-/* Кружок */
 .mini-slider::before {
   content: "";
   width: 14px;

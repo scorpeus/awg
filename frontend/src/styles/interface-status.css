@@ -16,7 +16,6 @@
   text-overflow: ellipsis;
 }
 
-/* Параграфы внутри */
 .interface-settings p {
   white-space: nowrap;
   overflow: hidden;

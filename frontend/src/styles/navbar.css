@@ -19,7 +19,6 @@
   background: none;
 }
 
-/* Убираем фон у ссылки */
 .nav-link {
   display: flex;
   align-items: center;

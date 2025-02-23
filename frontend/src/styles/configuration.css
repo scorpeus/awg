@@ -14,7 +14,6 @@
 .configuration-container.closed {
   max-height: 30px; /* Только заголовок */
 }
-
 .config-header {
   padding: 0px 10px;
   display: flex;

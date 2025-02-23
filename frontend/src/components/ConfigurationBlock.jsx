@@ -8,7 +8,6 @@ const Configuration = () => {
   const headerRef = useRef(null);
   const [maxHeight, setMaxHeight] = useState("0px");
 
-  // 🔹 Состояние параметров конфигурации
   const [configParams, setConfigParams] = useState({
     jc: 8,
     jmin: 50,

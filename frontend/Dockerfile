@@ -3,7 +3,7 @@ FROM node:18-alpine as builder
 
 WORKDIR /app
 
-# Копируем package.json и package-lock.json для установки зависимостей
+# Копируем package.json и package-lock.json для установки зависимосте
 COPY package*.json ./
 
 # Устанавливаем зависимости

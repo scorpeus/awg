@@ -9,5 +9,4 @@ function Users() {
     </div>
   );
 }
-
 export default Users;

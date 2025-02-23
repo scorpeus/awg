@@ -6,7 +6,7 @@ import UsersIcon from "../assets/users.svg";
 import SubscriptionsIcon from "../assets/subscriptions.svg";
 
 function Navbar({ setActiveTitle }) {
-  const location = useLocation(); // Получаем текущий путь
+  const location = useLocation();
 
   return (
     <nav className="navbar">

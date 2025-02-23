@@ -35,7 +35,7 @@ const PeersList = ({ hasActiveInterface }) => {
     // Здесь можно будет делать запрос к API, если нужно
   }, []);
 
-  // Функция поиска свободного IP-адреса (берем первый свободный от 2 до 250)
+  // Функция поиска свободного IP-адреса (берем первый свободный от 2 до 250
   const getAvailableIP = () => {
     const usedIPs = new Set(peers.map((peer) => Number(peer.ip.split(".")[3])));
     for (let i = 2; i <= 250; i++) {

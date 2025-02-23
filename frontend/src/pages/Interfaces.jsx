@@ -14,7 +14,6 @@ const Interfaces = () => {
   const [modalData, setModalData] = useState("");
 
   const tabsRef = useRef(null);
-
   const handleWheelScroll = (e) => {
     if (tabsRef.current) {
       e.preventDefault();

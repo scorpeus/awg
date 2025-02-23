@@ -9,5 +9,4 @@ const ToggleSwitch = ({ isActive, onToggle }) => {
     </label>
   );
 };
-
 export default ToggleSwitch;

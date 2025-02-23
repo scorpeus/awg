@@ -25,6 +25,6 @@
 
 .infobar {
   display: flex;
-  width: 220px; /* Фиксированная ширина */
+  width: 220px;
   overflow-y: auto;
 }

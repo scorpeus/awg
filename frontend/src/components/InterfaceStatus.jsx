@@ -21,7 +21,6 @@ const InterfaceStatus = ({
         setIsScrolling(textWidth > containerWidth);
       }
     };
-
     checkOverflow();
     window.addEventListener("resize", checkOverflow);
     return () => window.removeEventListener("resize", checkOverflow);

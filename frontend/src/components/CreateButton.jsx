@@ -13,5 +13,4 @@ const CreateButton = ({ onClick, text }) => {
     </button>
   );
 };
-
 export default CreateButton;
