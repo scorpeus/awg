@@ -18,19 +18,19 @@ services:
 
   # Если AmneziaWG запускается как отдельный контейнер, его можно добавить сюда:
   amneziawg:
-    image: ghcr.io/w0rng/amnezia-wg-easy
+    image: amneziavpn/amnezia-wg
     container_name: amneziawg
     environment:
       - LANG=en
-      - WG_HOST=your_server_ip_or_dns
-      - PASSWORD_HASH=your_bcrypt_hash
+      - WG_HOST=45.151.72.108 # Замените на IP-адрес или DNS вашего сервера
+      - PASSWORD_HASH=zMvzOPjUzdaH # Замените на реальный bcrypt hash
       - PORT=51821
       - WG_PORT=51820
     ports:
       - "51820:51820/udp"
       - "51821:51821/tcp"
     volumes:
-      - ~/.amnezia-wg-easy:/etc/wireguard
+      - ~/.amnezia-wg:/etc/wireguard
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
