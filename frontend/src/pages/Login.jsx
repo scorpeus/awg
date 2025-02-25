@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../styles/login.css";
 
 const Login = ({ setIsAuthenticated }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -18,9 +20,12 @@ const Login = ({ setIsAuthenticated }) => {
 
     const data = await response.json();
 
-    if (data.token) {
+    if (response.ok && data.token) {
       localStorage.setItem("jwt", data.token); // Сохраняем токен
-      setIsAuthenticated(true); // Помечаем пользователя как авторизованного
+      localStorage.setItem("role", data.role); // Сохраняем роль (admin/moderator)
+      localStorage.setItem("full_name", data.full_name); // Сохраняем имя пользователя
+      setIsAuthenticated(true);
+      navigate("/system"); // Перенаправляем на главную страницу
     } else {
       alert("Ошибка при авторизации!");
     }
