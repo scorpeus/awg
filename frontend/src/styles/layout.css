@@ -1,7 +1,6 @@
 .body-container {
   display: flex;
   flex-grow: 1;
-  height: 100vh;
   gap: 16px;
 }
 
@@ -21,6 +20,7 @@
 
 .mainbar {
   width: 800px;
+  height: 100vh;
 }
 
 .infobar {

@@ -1,9 +1,9 @@
 import logo from "../assets/logo.svg"; // ✅ Импорт как путь к файлу
 import "../styles/header.css"; // Стили
 import SearchBar from "./SearchBar";
-import ProfileMenu from "./ProfileMenu";
+import ProfileMenu from "./ProfileMenu"; // Импортируем ProfileMenu
 
-function Header({ title }) {
+function Header({ title, setIsAuthenticated }) {
   return (
     <header className="header">
       <div className="header-logo">
@@ -15,7 +15,9 @@ function Header({ title }) {
         <h1 className="page-title">{title}</h1>
         <SearchBar />
       </div>
-      <ProfileMenu />
+
+      {/* Передаем setIsAuthenticated в ProfileMenu */}
+      <ProfileMenu setIsAuthenticated={setIsAuthenticated} />
     </header>
   );
 }

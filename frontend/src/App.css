@@ -75,8 +75,8 @@
 html,
 body,
 #root {
-  height: 100%;
   margin: 0;
+  height: 100%;
 }
 /* 🔹 Минималистичный стиль скролла для Chrome, Edge, Safari */
 ::-webkit-scrollbar {
@@ -119,7 +119,7 @@ button {
   margin: 0 auto;
   max-width: 1270px;
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }

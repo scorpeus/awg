@@ -2,6 +2,7 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
+  Navigate,
   useLocation,
 } from "react-router-dom";
 import { useState, useEffect } from "react";
@@ -11,58 +12,57 @@ import Users from "./pages/Users";
 import Subscriptions from "./pages/Subscriptions";
 import Navbar from "./components/Navbar";
 import Header from "./components/Header";
+import Login from "./pages/Login"; // Страница логина
 import ThemeSwitcher from "./components/ThemeSwitcher";
 import "./App.css";
-import "./styles/layout.css"; // Подключаем глобальные стили
+import "./styles/layout.css";
 
 function AppContent() {
   const [title, setTitle] = useState("System");
-  const location = useLocation(); // Теперь вызываем `useLocation` внутри Router
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const location = useLocation(); // Проверяем текущий путь
 
   useEffect(() => {
-    switch (location.pathname) {
-      case "/":
-        setTitle("System");
-        break;
-      case "/interfaces":
-        setTitle("Interfaces");
-        break;
-      case "/users":
-        setTitle("Users");
-        break;
-      case "/subscriptions":
-        setTitle("Subscriptions");
-        break;
-      default:
-        setTitle("System Dashboard");
+    const token = localStorage.getItem("jwt");
+    if (token) {
+      setIsAuthenticated(true);
     }
-  }, [location.pathname]); // Пересчитываем заголовок при изменении пути
+  }, []);
+
+  // 🔹 Если пользователь не авторизован, принудительно отправляем его на /login
+  if (!isAuthenticated && location.pathname !== "/login") {
+    return <Navigate to="/login" replace />;
+  }
 
   return (
     <div className="app-container">
-      <Header title={title} />
-      <div className="body-container">
-        {/* Левый сайдбар */}
-        <aside className="sidebar">
-          <Navbar setActiveTitle={setTitle} />
-          {/* <ThemeSwitcher /> */}
-        </aside>
-
-        {/* Основное содержимое */}
-        <main className="mainbar">
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/interfaces" element={<Interfaces />} />
-            <Route path="/users" element={<Users />} />
-            <Route path="/subscriptions" element={<Subscriptions />} />
-          </Routes>
-        </main>
-
-        {/* Правая панель */}
-        <aside className="infobar">
-          <div className="infobar-container"></div>
-        </aside>
-      </div>
+      {!isAuthenticated ? (
+        <div className="login-container">
+          <Login setIsAuthenticated={setIsAuthenticated} />
+        </div>
+      ) : (
+        <div className="app-container">
+          <Header title={title} setIsAuthenticated={setIsAuthenticated} />
+          <div className="body-container">
+            <aside className="sidebar">
+              <Navbar setActiveTitle={setTitle} />
+            </aside>
+            <main className="mainbar">
+              <Routes>
+                <Route path="/system" element={<Dashboard />} />
+                <Route path="/interfaces" element={<Interfaces />} />
+                <Route path="/users" element={<Users />} />
+                <Route path="/subscriptions" element={<Subscriptions />} />
+                {/* 🔹 Перенаправляем любой несуществующий маршрут на /system */}
+                <Route path="*" element={<Navigate to="/system" replace />} />
+              </Routes>
+            </main>
+            <aside className="infobar">
+              <div className="infobar-container"></div>
+            </aside>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -70,8 +70,9 @@ function AppContent() {
 function App() {
   return (
     <Router>
-      <AppContent /> {/* Обернули AppContent в Router */}
+      <AppContent />
     </Router>
   );
 }
+
 export default App;
