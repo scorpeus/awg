@@ -3,105 +3,68 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from datetime import datetime, timedelta
 import jwt
+import psycopg2
+import bcrypt
 
+app = FastAPI(title="Amnezeus VPN API", version="0.1.0")
 
-app = FastAPI(
-    title="Amnezeus VPN API",
-    version="0.1.0"
-)
-
-# Добавляем middleware для поддержки CORS
+# CORS Middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Разрешаем все домены (для разработки)
+    allow_origins=["*"],
     allow_credentials=True,
-    allow_methods=["*"],  # Разрешаем все HTTP методы
-    allow_headers=["*"],  # Разрешаем все заголовки
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
-# Пример хранения пользователей (логин/пароль)
-fake_users_db = {
-    "admin": {
-        "username": "admin",
-        "password": "password"  # В реальном приложении нужно хешировать пароли
-    }
-}
+# Подключение к базе данных PostgreSQL
+conn = psycopg2.connect(
+    dbname="awgdb",
+    user="postgres",
+    password="DyMqWdCM",  # Замени на свой пароль
+    host="localhost",
+    client_encoding="UTF8"
+)
+cursor = conn.cursor()
 
 SECRET_KEY = "your_secret_key"
 ALGORITHM = "HS256"
 
-# Модели данных
+# Модель данных для логина
 class UserLogin(BaseModel):
     username: str
     password: str
 
-class VPNClient(BaseModel):
-    name: str
-    ip: str
+# Функция проверки пароля
+def verify_password(plain_password, hashed_password):
+    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode())
 
-# Временное хранилище клиентов
-clients = {}
-
-# Генерация токена JWT
-def create_access_token(data: dict, expires_delta: timedelta = timedelta(minutes=30)):
+# Функция генерации JWT-токена
+def create_access_token(data: dict, expires_delta: timedelta = timedelta(hours=2)):
     to_encode = data.copy()
     expire = datetime.utcnow() + expires_delta
     to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
+    return jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
 
-# Проверка токена
-def verify_token(token: str):
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        return payload
-    except jwt.PyJWTError:
-        raise HTTPException(
-            status_code=401,
-            detail="Invalid token",
-        )
-
-# Маршрут логина, возвращает токен
+# Эндпоинт для логина
 @app.post("/login")
 def login(user: UserLogin):
-    if user.username in fake_users_db and fake_users_db[user.username]["password"] == user.password:
-        # Генерация токена при успешной авторизации
-        access_token = create_access_token(data={"sub": user.username})
-        return {"token": access_token}
-    raise HTTPException(status_code=401, detail="Invalid credentials")
+    cursor.execute("SELECT password, role, full_name FROM admins WHERE username = %s", (user.username,))
+    result = cursor.fetchone()
 
-# Защищенный эндпоинт для получения списка клиентов
-@app.get("/clients")
-def list_clients(token: str = Depends(verify_token)):
-    """
-    Возвращает всех зарегистрированных клиентов. Проверяет валидность токена.
-    """
-    return clients
+    if not result:
+        raise HTTPException(status_code=401, detail="Invalid credentials")
 
-# Эндпоинт для создания клиента
-@app.post("/clients")
-def create_client(client: VPNClient, token: str = Depends(verify_token)):
-    """
-    Создает нового клиента. Только для авторизованных пользователей.
-    """
-    if client.name in clients:
-        raise HTTPException(
-            status_code=400,
-            detail="Клиент с таким именем уже существует"
-        )
-    clients[client.name] = {"ip": client.ip}
-    return {"message": "Клиент успешно создан", "client": client}
+    stored_password, role, full_name = result
+    print(f"full_name from DB: {full_name}")
 
-# Эндпоинт для удаления клиента
-@app.delete("/clients/{client_name}")
-def delete_client(client_name: str, token: str = Depends(verify_token)):
-    """
-    Удаляет клиента по имени. Только для авторизованных пользователей.
-    """
-    if client_name not in clients:
-        raise HTTPException(
-            status_code=404,
-            detail="Клиент не найден"
-        )
-    del clients[client_name]
-    return {"message": f"Клиент '{client_name}' удалён"}
+    if not verify_password(user.password, stored_password):
+        raise HTTPException(status_code=401, detail="Invalid credentials")
+
+    # Генерируем JWT-токен
+    access_token = create_access_token({"sub": user.username, "role": role})
+
+    print(f"Raw full_name: {full_name.encode('raw_unicode_escape').decode('utf-8')}")
+
+    return {"token": access_token, "role": role, "full_name": full_name}  # Теперь отдаем full_name
+
