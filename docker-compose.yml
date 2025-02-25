@@ -1,4 +1,8 @@
 version: "3.8"
+
+volumes:
+etc_wireguard:
+
 services:
   backend:
     build: ./backend
@@ -16,27 +20,23 @@ services:
       - "3000:80"
     restart: unless-stopped
 
-  # Если AmneziaWG запускается как отдельный контейнер, его можно добавить сюда:
-  amneziawg:
-    image: amneziavpn/amnezia-wg
-    container_name: amneziawg
-    environment:
-      - LANG=en
-      - WG_HOST=45.151.72.108 # Замените на IP-адрес или DNS вашего сервера
-      - PASSWORD_HASH=zMvzOPjUzdaH # Замените на реальный bcrypt hash
-      - PORT=51821
-      - WG_PORT=51820
-    ports:
-      - "51820:51820/udp"
-      - "51821:51821/tcp"
+  amnezia:
+    build: ./amneziawg
+    env_file:
+      - .env
+    container_name: amnezia
     volumes:
-      - ~/.amnezia-wg:/etc/wireguard
+      - etc_wireguard:/etc/wireguard
+    ports:
+      - "${WG_PORT}:${WG_PORT}/udp"
+      - "${PORT}:${PORT}/tcp"
+    restart: unless-stopped
     cap_add:
       - NET_ADMIN
       - SYS_MODULE
+      # - NET_RAW # ⚠️ Uncomment if using Podman
     sysctls:
-      - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv4.ip_forward=1
+      - net.ipv4.conf.all.src_valid_mark=1
     devices:
       - /dev/net/tun:/dev/net/tun
-    restart: unless-stopped

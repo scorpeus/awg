@@ -1,0 +1,58 @@
+/* styles/login.css */
+.login-container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.login-container form {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgba(242, 247, 249, 1);
+}
+
+.login-container input {
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  border-radius: 10px;
+  box-sizing: border-box;
+}
+
+.login-container button {
+  padding: 10px;
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 30px;
+}
+
+.form-box {
+  margin-top: 10px;
+}
+
+.login-container button:hover {
+  background-color: rgb(49, 149, 255);
+}
+
+input::placeholder {
+  color: grey; /* Серый цвет текста */
+  opacity: 1; /* Убедимся, что текст видим */
+}
+
+input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgb(49, 149, 255);
+}

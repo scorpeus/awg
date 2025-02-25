@@ -13,8 +13,10 @@ function Navbar({ setActiveTitle }) {
       <ul>
         <li>
           <Link
-            to="/"
-            className={`nav-link ${location.pathname === "/" ? "active" : ""}`}
+            to="/system"
+            className={`nav-link ${
+              location.pathname === "/system" ? "active" : ""
+            }`}
             onClick={() => setActiveTitle("System")}
           >
             <img src={SystemIcon} alt="System" className="nav-icon" />
